@@ -71,19 +71,25 @@ Create a view with atleast these elements:
 ## Advanced
 
 Generate a secret for a user:
+
 ```Wiebenieuwenhuis\Laravel2fa\Laravel2fa::generateSecret()```
 
 Generate a QR code for setup:
+
 ```Wiebenieuwenhuis\Laravel2fa\Laravel2fa::generateQrCode()```
 
 Validate a code:
+
 ```Wiebenieuwenhuis\Laravel2fa\Laravel2fa::validate($code)```
 
 To enable 2fa after setup you can enable it, make sure you've created it first by creating a secret or generating a QR code.
+
 ```Wiebenieuwenhuis\Laravel2fa\Laravel2fa::enable()```
 
 Disable the 2fa:
+
 ```Wiebenieuwenhuis\Laravel2fa\Laravel2fa::disable()```
 
 To check if the user has 2fa enabled:
+
 ```Wiebenieuwenhuis\Laravel2fa\Laravel2fa::enabled()```
