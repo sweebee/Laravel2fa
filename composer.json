@@ -16,5 +16,12 @@
     "psr-4": {
       "Wiebenieuwenhuis\\": "src/"
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Wiebenieuwenhuis\\Laravel2fa\\Laravel2faServiceProvider"
+      ]
+    }
   }
 }
