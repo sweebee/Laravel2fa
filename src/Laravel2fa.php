@@ -72,8 +72,8 @@ class Laravel2fa {
 	{
 		$model = self::getModel($model);
 		$settings = self::getSettings($model);
-		$var = base64_encode($settings->model_id . $settings->model_type);
-		Cookie::forget($var);
+
+		Cookie::forget(self::cookieName($settings));
 		Model::where('model_type', get_class($model))->where('model_id', $model->id)->delete();
 	}
 
@@ -134,8 +134,7 @@ class Laravel2fa {
 			$settings->remember_token = (string) Str::uuid();
 			$settings->save();
 		}
-		$var = base64_encode($settings->model_id . $settings->model_type);
-		Cookie::queue(Cookie::make("2fa_remember_$var", $settings->remember_token, 3600 * 24 * 7));
+		Cookie::queue(Cookie::make(self::cookieName($settings), $settings->remember_token, 3600 * 24 * 7));
 	}
 
 	/**
@@ -157,13 +156,14 @@ class Laravel2fa {
 			return true;
 		}
 
-		$var = base64_encode($settings->model_id . $settings->model_type);
-		if($token = Cookie::get("2fa_remember_$var")){
+		$cookieName = self::cookieName($settings);
+
+		if($token = Cookie::get($cookieName)){
 			if($token === $settings->remember_token){
 				session(['2fa_authenticated' => true]);
 				return true;
 			}
-			Cookie::forget($var);
+			Cookie::forget($cookieName);
 		}
 
 		return false;
@@ -193,6 +193,17 @@ class Laravel2fa {
 	private static function getSettings(BaseModel $model)
 	{
 		return Model::where('model_type', get_class($model))->where('model_id', $model->id)->first();
+	}
+
+
+	/**
+	 * @param Model $settings
+	 *
+	 * @return string
+	 */
+	private static function cookieName(Model $settings)
+	{
+		return '2fa_remember_' . str_replace('=', '', base64_encode($settings->model_id . $settings->model_type));
 	}
 
 }
