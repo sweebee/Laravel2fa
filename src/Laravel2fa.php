@@ -4,6 +4,8 @@ namespace Wiebenieuwenhuis\Laravel2fa;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Cache;
 use chillerlan\QRCode\QRCode;
@@ -69,6 +71,9 @@ class Laravel2fa {
 	public static function disable(BaseModel $model = null)
 	{
 		$model = self::getModel($model);
+		$settings = self::getSettings($model);
+		$var = base64_encode($settings->model_id . $settings->model_type);
+		Cookie::forget($var);
 		Model::where('model_type', get_class($model))->where('model_id', $model->id)->delete();
 	}
 
@@ -121,6 +126,18 @@ class Laravel2fa {
 		return $valid;
 	}
 
+	public static function remember(BaseModel $model = null)
+	{
+		$model = self::getModel($model);
+		$settings = self::getSettings($model);
+		if(!$settings->remember_token) {
+			$settings->remember_token = (string) Str::uuid();
+			$settings->save();
+		}
+		$var = base64_encode($settings->model_id . $settings->model_type);
+		Cookie::queue(Cookie::make("2fa_remember_$var", $settings->remember_token, 3600 * 24 * 7));
+	}
+
 	/**
 	 * Check if authenticated
 	 *
@@ -136,7 +153,20 @@ class Laravel2fa {
 			return true;
 		}
 
-		return (bool)session('2fa_authenticated');
+		if(session('2fa_authenticated')){
+			return true;
+		}
+
+		$var = base64_encode($settings->model_id . $settings->model_type);
+		if($token = Cookie::get("2fa_remember_$var")){
+			if($token === $settings->remember_token){
+				session(['2fa_authenticated' => true]);
+				return true;
+			}
+			Cookie::forget($var);
+		}
+
+		return false;
 	}
 
 	/**
