@@ -76,6 +76,7 @@ class Laravel2fa {
 	 */
 	public static function validate($code, BaseModel $model = null)
 	{
+		$code = str_replace(' ','', trim($code));
 		// If the code is already cached, its invalid
 		if(!Cache::missing('2fa_' . $code)){
 			return false;
