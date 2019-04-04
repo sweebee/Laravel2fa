@@ -14,6 +14,6 @@ class Middleware
 			return $next($request);
 		}
 
-		return redirect('/2fa/auth');
+		return redirect(config('2fa.auth_route'));
 	}
 }

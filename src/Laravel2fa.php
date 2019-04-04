@@ -30,6 +30,11 @@ class Laravel2fa {
 		return decrypt($settings->secret);
 	}
 
+	/**
+	 * @param BaseModel|null $model
+	 *
+	 * @return mixed
+	 */
 	public static function generateQrCode(BaseModel $model = null)
 	{
 		$model = self::getModel($model);
@@ -45,20 +50,33 @@ class Laravel2fa {
 		return (new QRCode())->render($url);
 	}
 
+	/**
+	 * @param BaseModel|null $model
+	 */
 	public static function enable(BaseModel $model = null)
 	{
 		$model = self::getModel($model);
-		$settings = self::getSettings($model);
+		if(!$settings = self::getSettings($model)){
+			abort(403, '2fa not set');
+		}
 		$settings->enabled = true;
 		$settings->save();
 	}
 
+	/**
+	 * @param BaseModel|null $model
+	 */
 	public static function disable(BaseModel $model = null)
 	{
 		$model = self::getModel($model);
 		Model::where('model_type', get_class($model))->where('model_id', $model->id)->delete();
 	}
 
+	/**
+	 * @param BaseModel|null $model
+	 *
+	 * @return bool
+	 */
 	public static function enabled(BaseModel $model = null)
 	{
 		$model = self::getModel($model);
@@ -121,11 +139,27 @@ class Laravel2fa {
 		return (bool)session('2fa_authenticated');
 	}
 
+	/**
+	 * @param $model
+	 *
+	 * @return mixed
+	 */
 	private static function getModel($model)
 	{
-		return $model ?? Auth::guard(config('2fa.guard'))->user();
+		$model = $model ?? Auth::guard(config('2fa.guard'))->user();
+
+		if(!$model){
+			abort(403, 'User not logged in');
+		}
+
+		return $model;
 	}
 
+	/**
+	 * @param BaseModel $model
+	 *
+	 * @return mixed
+	 */
 	private static function getSettings(BaseModel $model)
 	{
 		return Model::where('model_type', get_class($model))->where('model_id', $model->id)->first();
