@@ -8,7 +8,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "pragmarx/google2fa": "^2.0@dev",
+    "pragmarx/google2fa": "^3.0",
     "php": "^7.2",
     "chillerlan/php-qrcode": "^3.0"
   },

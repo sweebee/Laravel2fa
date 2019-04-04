@@ -4,30 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "115d647b6e5794519055b4f073922eb7",
+    "content-hash": "ec74fac0e4f849e5032bc1bfe052f752",
     "packages": [
         {
             "name": "chillerlan/php-qrcode",
-            "version": "dev-master",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chillerlan/php-qrcode.git",
-                "reference": "dc7d2ea8472111f97983fda28913c924cc6d11d7"
+                "reference": "ba81dab259d687d246295e6998533c314367847a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chillerlan/php-qrcode/zipball/dc7d2ea8472111f97983fda28913c924cc6d11d7",
-                "reference": "dc7d2ea8472111f97983fda28913c924cc6d11d7",
+                "url": "https://api.github.com/repos/chillerlan/php-qrcode/zipball/ba81dab259d687d246295e6998533c314367847a",
+                "reference": "ba81dab259d687d246295e6998533c314367847a",
                 "shasum": ""
             },
             "require": {
                 "chillerlan/php-settings-container": "^1.0",
-                "ext-json": "*",
-                "ext-mbstring": "*",
                 "php": "^7.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.0"
+                "phpunit/phpunit": "^7.5"
             },
             "type": "library",
             "extra": {
@@ -53,22 +51,14 @@
                     "name": "Smiley",
                     "email": "smiley@chillerlan.net",
                     "homepage": "https://github.com/codemasher"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/chillerlan/php-qrcode/graphs/contributors"
                 }
             ],
             "description": "A QR code generator. PHP 7.2+",
             "homepage": "https://github.com/chillerlan/php-qrcode",
             "keywords": [
-                "phpqrcode",
-                "qr",
-                "qr code",
-                "qrcode",
-                "qrcode-generator"
+                "qr code"
             ],
-            "time": "2019-03-18T14:49:54+00:00"
+            "time": "2018-12-20T15:37:46+00:00"
         },
         {
             "name": "chillerlan/php-settings-container",
@@ -231,16 +221,16 @@
         },
         {
             "name": "pragmarx/google2fa",
-            "version": "dev-master",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antonioribeiro/google2fa.git",
-                "reference": "7d526619f06bd3e0687e0e5242ccd65ae6b1d8c7"
+                "reference": "6949226739e4424f40031e6f1c96b1fd64047335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/google2fa/zipball/7d526619f06bd3e0687e0e5242ccd65ae6b1d8c7",
-                "reference": "7d526619f06bd3e0687e0e5242ccd65ae6b1d8c7",
+                "url": "https://api.github.com/repos/antonioribeiro/google2fa/zipball/6949226739e4424f40031e6f1c96b1fd64047335",
+                "reference": "6949226739e4424f40031e6f1c96b1fd64047335",
                 "shasum": ""
             },
             "require": {
@@ -250,7 +240,11 @@
                 "symfony/polyfill-php56": "~1.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4|~5|~6|~7"
+                "bacon/bacon-qr-code": "~1.0",
+                "phpunit/phpunit": "~4|~5|~6"
+            },
+            "suggest": {
+                "bacon/bacon-qr-code": "Required to generate inline QR Codes."
             },
             "type": "library",
             "extra": {
@@ -281,9 +275,10 @@
                 "2fa",
                 "Authentication",
                 "Two Factor Authentication",
-                "google2fa"
+                "google2fa",
+                "laravel"
             ],
-            "time": "2019-03-22T19:38:54+00:00"
+            "time": "2018-08-29T13:28:06+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -397,10 +392,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "pragmarx/google2fa": 20,
-        "chillerlan/php-qrcode": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
