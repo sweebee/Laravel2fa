@@ -44,6 +44,9 @@ class Laravel2faController extends Controller
 
 	public function auth()
 	{
+		if(!Laravel2fa::enabled()){
+			return redirect(route('2fa::setup'));
+		}
 		return view('2fa::auth');
 	}
 
