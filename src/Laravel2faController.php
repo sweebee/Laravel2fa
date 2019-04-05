@@ -29,7 +29,7 @@ class Laravel2faController extends Controller
 
 		if(!Laravel2fa::validate($code)){
 			return back()->withErrors([
-				config('2fa.code_input_name') => 'Invalid code'
+				config('2fa.code_input_name') => trans('2fa::base.invalid_code')
 			]);
 		}
 
@@ -48,7 +48,7 @@ class Laravel2faController extends Controller
 		$code = $request->get(config('2fa.code_input_name'));
 		if(!Laravel2fa::validate($code)){
 			return back()->withErrors([
-				config('2fa.code_input_name') => 'Je hebt een onjuiste code ingevuld'
+				config('2fa.code_input_name') => trans('2fa::base.invalid_code')
 			]);
 		}
 

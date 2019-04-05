@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>@yield('title', '2fa')</title>
+    <title>@yield('title', trans('2fa::base.title'))</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         body {
@@ -18,7 +18,7 @@
             <div class="col-md-8">
                 <div class="card mt-5">
                     <div class="card-header">
-                        2-staps verificatie
+                        {{ trans('2fa::base.title') }}
                     </div>
                     <div class="card-body">
                         @yield('content')

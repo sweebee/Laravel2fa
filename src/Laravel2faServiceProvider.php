@@ -14,7 +14,7 @@ class Laravel2faServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->make('Wiebenieuwenhuis\Laravel2fa\Laravel2faController');
-	    $this->loadViewsFrom(__DIR__.'/views', '2fa');
+	    $this->loadViewsFrom(__DIR__.'/resources/views', '2fa');
     }
 
     /**
@@ -24,6 +24,7 @@ class Laravel2faServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+	    $this->loadTranslationsFrom(realpath(__DIR__.'/resources/lang'), '2fa');
     	$this->publishes([
 		    __DIR__.'/config/2fa.php' => config_path('2fa.php'),
 	    ]);
