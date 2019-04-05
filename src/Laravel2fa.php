@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Cache;
-use chillerlan\QRCode\QRCode;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 
 class Laravel2fa {
 
@@ -49,7 +52,13 @@ class Laravel2fa {
 			$secret
 		);
 
-		return (new QRCode())->render($url);
+		$renderer = new ImageRenderer(
+			new RendererStyle(400),
+			new ImagickImageBackEnd()
+		);
+
+		$writer = new Writer($renderer);
+		return 'data:image/png;base64,' . base64_encode($writer->writeString($url));
 	}
 
 	/**
