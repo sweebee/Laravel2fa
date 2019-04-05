@@ -37,6 +37,8 @@ class Laravel2faServiceProvider extends ServiceProvider
 		    __DIR__ . '/migrations' => $this->app->databasePath() . '/migrations'
 	    ], 'migrations');
 
-	    include __DIR__.'/routes.php';
+	    Route::group(['middleware' => config('2fa.middleware', [])], function () {
+		    $this->loadRoutesFrom(__DIR__.'/routes.php');
+	    });
     }
 }
