@@ -3,6 +3,7 @@
 namespace Wiebenieuwenhuis\Laravel2fa;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class Laravel2faServiceProvider extends ServiceProvider
 {
