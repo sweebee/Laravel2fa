@@ -13,7 +13,7 @@ class Create2faTable extends Migration
      */
     public function up()
     {
-        Schema::create('2fa', function (Blueprint $table) {
+        Schema::create('2fa_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('model_id');
             $table->string('model_type');

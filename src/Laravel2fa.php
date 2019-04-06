@@ -7,7 +7,6 @@ use BaconQrCode\Writer;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Str;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Cache;
 
@@ -23,7 +22,7 @@ class Laravel2fa {
 		$model = self::getModel($model);
 
 		if(!$settings = self::getSettings($model)){
-			$settings = new Model();
+			$settings = new Settings();
 			$settings->model_type = get_class($model);
 			$settings->model_id = $model->id;
 			$settings->secret = encrypt((new Google2FA())->generateSecretKey());
@@ -80,7 +79,7 @@ class Laravel2fa {
 		$settings = self::getSettings($model);
 
 		Cookie::forget(self::cookieName($settings));
-		Model::where('model_type', get_class($model))->where('model_id', $model->id)->delete();
+		Settings::where('model_type', get_class($model))->where('model_id', $model->id)->delete();
 	}
 
 	/**
@@ -136,11 +135,7 @@ class Laravel2fa {
 	{
 		$model = self::getModel($model);
 		$settings = self::getSettings($model);
-		if(!$settings->remember_token) {
-			$settings->remember_token = (string) Str::uuid();
-			$settings->save();
-		}
-		Cookie::queue(Cookie::make(self::cookieName($settings), $settings->remember_token, 3600 * 24 * 7));
+		Cookie::queue(Cookie::make(self::cookieName($settings), $settings->remember_token(), 3600 * 24 * 7));
 	}
 
 	/**
@@ -198,16 +193,16 @@ class Laravel2fa {
 	 */
 	private static function getSettings(BaseModel $model)
 	{
-		return Model::where('model_type', get_class($model))->where('model_id', $model->id)->first();
+		return Settings::where('model_type', get_class($model))->where('model_id', $model->id)->first();
 	}
 
 
 	/**
-	 * @param Model $settings
+	 * @param Settings $settings
 	 *
 	 * @return string
 	 */
-	private static function cookieName(Model $settings)
+	private static function cookieName(Settings $settings)
 	{
 		return '2fa_remember_' . str_replace('=', '', base64_encode($settings->model_id . $settings->model_type));
 	}
