@@ -9,5 +9,5 @@ return [
 	'already_enabled' => "Je hebt 2-staps verificatie al aangezet",
 	'setup_description' => "Scan de QR code met behup van de Google Authenticator en vul vervolgens de code in om de 2-staps verificatie in te schakelen.",
 	'back' => 'Terug',
-	'code_input_label' => 'Code'
+	'code_input_label' => 'Authenticatiecode'
 ];

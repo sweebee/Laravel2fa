@@ -9,5 +9,5 @@ return [
 	'already_enabled' => "You have already enabled 2-step verification",
 	'setup_description' => "Scan the QR code using the Google Authenticator and then enter the code to enable the 2-step verification.",
 	'back' => 'Back',
-	'code_input_label' => 'Code'
+	'code_input_label' => 'Authentication code'
 ];
