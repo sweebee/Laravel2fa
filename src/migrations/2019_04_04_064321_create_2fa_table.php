@@ -17,9 +17,9 @@ class Create2faTable extends Migration
             $table->bigIncrements('id');
             $table->string('model_id');
             $table->string('model_type');
-            $table->text('secret');
+	        $table->boolean('enabled')->default(false);
+	        $table->text('secret');
             $table->string('remember_token')->nullable();
-            $table->boolean('enabled')->default(false);
             $table->unique(['model_id', 'model_type']);
         });
     }
