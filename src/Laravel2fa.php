@@ -2,16 +2,14 @@
 
 namespace Wiebenieuwenhuis\Laravel2fa;
 
+use BaconQrCode\Renderer\Image\Svg;
+use BaconQrCode\Writer;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Cache;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Writer;
 
 class Laravel2fa {
 
@@ -52,13 +50,12 @@ class Laravel2fa {
 			$secret
 		);
 
-		$renderer = new ImageRenderer(
-			new RendererStyle(400),
-			new ImagickImageBackEnd()
-		);
-
+		$renderer = new Svg();
+		$renderer->setHeight(256);
+		$renderer->setWidth(256);
+		$renderer->setMargin(1);
 		$writer = new Writer($renderer);
-		return 'data:image/png;base64,' . base64_encode($writer->writeString($url));
+		return 'data:image/svg+xml;base64,' . base64_encode($writer->writeString($url));
 	}
 
 	/**
