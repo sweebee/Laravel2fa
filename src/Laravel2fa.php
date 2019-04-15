@@ -106,7 +106,7 @@ class Laravel2fa {
 	{
 		$code = str_replace(' ','', trim($code));
 		// If the code is already cached, its invalid
-		if(!Cache::missing('2fa_' . $code)){
+		if(Cache::has('2fa_' . $code)){
 			return false;
 		}
 
