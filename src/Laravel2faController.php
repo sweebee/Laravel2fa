@@ -2,13 +2,9 @@
 
 namespace Wiebenieuwenhuis\Laravel2fa;
 
-use App\Http\Controllers\Controller;
-use chillerlan\QRCode\QRCode;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Cookie;
-use PragmaRX\Google2FA\Google2FA;
 
 class Laravel2faController extends Controller
 {
