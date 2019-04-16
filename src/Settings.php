@@ -15,7 +15,10 @@ class Settings extends BaseModel
     	'enabled' => 'boolean'
     ];
 
-    public function remember_token()
+	/**
+	 * @return string
+	 */
+	public function remember_token()
     {
 	    if(!$this->remember_token) {
 		    $this->remember_token = str_replace('-','',((string) Str::uuid()).((string) Str::uuid()));
