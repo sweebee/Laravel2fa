@@ -20,6 +20,9 @@ return [
 	// The name of the checkbox field to remember the device
 	'remember_input_name' => '2fa_remember',
 
+	// Time to remember the device
+	'remember_time' => 3600 * 24 * 7,
+
 	// Middlewares to use in the default routes
 	'middleware' => [
 		'web',

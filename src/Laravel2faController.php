@@ -19,7 +19,7 @@ class Laravel2faController extends Controller
 		$enabled = Laravel2fa::enabled();
 
 		return view('2fa::setup')->with([
-			'user' => Auth::guard(config('2fa.guard'))->user(),
+			'user' => Auth::guard(config('2fa.guard', 'web'))->user(),
 			'qr' => $qr,
 			'enabled' => $enabled
 		]);

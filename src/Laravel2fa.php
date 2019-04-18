@@ -52,7 +52,7 @@ class Laravel2fa {
 
 		// Generate a 2fa url
 		$url = (new Google2FA())->getQRCodeUrl(
-			config('app.name'),
+			config('app.name', 'Laravel'),
 			$model->email,
 			$secret
 		);
@@ -157,7 +157,10 @@ class Laravel2fa {
 	{
 		$model = self::getModel($model);
 		$settings = self::getSettings($model);
-		Cookie::queue(Cookie::make(self::cookieName($settings), $settings->remember_token(), 3600 * 24 * 7));
+
+		$time = config('2fa.remember_time', 3600 * 24 * 7);
+
+		Cookie::queue(Cookie::make(self::cookieName($settings), $settings->remember_token(), $time));
 	}
 
 	/**
@@ -204,7 +207,7 @@ class Laravel2fa {
 	 */
 	private static function getModel($model)
 	{
-		$model = $model ?? Auth::guard(config('2fa.guard'))->user();
+		$model = $model ?? Auth::guard(config('2fa.guard', 'web'))->user();
 
 		if(!$model){
 			abort(403, 'User not logged in');
