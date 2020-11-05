@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Wiebenieuwenhuis\\": "src/"
+      "Wiebenieuwenhuis\\Laravel2fa\\": "src/"
     }
   },
   "extra": {
