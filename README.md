@@ -3,7 +3,7 @@
 ### Installation:
 
 ```
-composer require wiebenieuwenhuis/laravel-2fa
+composer require wiebenieuwenhuis/laravel2fa
 php artisan vendor:publish --provider="Wiebenieuwenhuis\Laravel2fa\Laravel2faServiceProvider"
 php artisan migrate
 ```
