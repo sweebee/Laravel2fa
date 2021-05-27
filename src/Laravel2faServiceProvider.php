@@ -51,6 +51,11 @@ class Laravel2faServiceProvider extends ServiceProvider
 	    $this->publishes([
 		    __DIR__ . '/migrations' => $this->app->databasePath() . '/migrations'
 	    ], 'laravel2fa-migrations');
+	    
+	    // Publish views
+	    $this->publishes([
+	        __DIR__.'/resources/views' => resource_path('views/vendor/2fa'),
+	    ]);
     }
 
 	/**
