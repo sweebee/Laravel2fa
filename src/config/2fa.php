@@ -26,6 +26,11 @@ return [
 	// Middlewares to use in the default routes
 	'middleware' => [
 		'web',
-	]
+	],
+	
+	// Exclude urls from middleware
+        'exclude_urls' => [
+            'admin/logout'
+        ],
 
 ];
