@@ -9,7 +9,7 @@ class Middleware
 	public function handle($request, Closure $next)
 	{
 		// Check if the user is authenticated by 2fa
-		if(Laravel2fa::authenticated()){
+		if(Laravel2fa::authenticated() || in_array($request->route()->uri, config('2fa.exclude_urls', []))){
 			return $next($request);
 		}
 
