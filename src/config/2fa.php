@@ -2,6 +2,9 @@
 
 return [
 
+	// Enable if 2fa is required
+        'required' => env('2FA_REQUIRED', false),
+	
 	// Prefix for the default routes
 	'prefix' => '2fa',
 
