@@ -41,32 +41,7 @@ By API:
 
 ## Custom views
 
-This package has its own views, to override these views you have to override the routes.
-
-### Custom setup
-
-Create a view with atleast these elements:
-
-```html
-<form method="post" action="/2fa/setup">
-  <img src="{{ Wiebenieuwenhuis\Laravel2fa\Laravel2fa::generateQrCode() }}" alt="">
-  {{ csrf_field }}
-  <input type="text" name="2fa_code">
-  <button type="submit">Validate</button>
-</form>
-```
-
-### Custom validation
-
-Create a view with atleast these elements:
-
-```html
-<form method="post" action="/2fa/auth">
-  {{ csrf_field }}
-  <input type="text" name="2fa_code">
-  <button type="submit">Validate</button>
-</form>
-```
+This package has its own views, these are published in your resource folder ```resources/views/vendor/2fa```. You can modify these to your needs.
 
 ## Advanced
 
