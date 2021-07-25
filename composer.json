@@ -9,7 +9,7 @@
   "minimum-stability": "dev",
   "require": {
     "pragmarx/google2fa": "^3.0",
-    "php": "^7.1",
+    "php": "^7.3 || ^8.0",
     "bacon/bacon-qr-code": "^1.0"
   },
   "autoload": {
