@@ -2,8 +2,10 @@
 
 namespace Wiebenieuwenhuis\Laravel2fa;
 
-use BaconQrCode\Renderer\Image\Svg;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Writer;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -57,13 +59,12 @@ class Laravel2fa {
 			$secret
 		);
 
-		// Generate the svg
-		$renderer = new Svg();
-		$renderer->setHeight(256);
-		$renderer->setWidth(256);
-		$renderer->setMargin(1);
-		$writer = new Writer($renderer);
-		$svg = $writer->writeString($url);
+        $renderer = new ImageRenderer(
+            new RendererStyle(400),
+            new SvgImageBackEnd()
+        );
+        $writer = new Writer($renderer);
+        $svg = $writer->writeString($url);
 
 		return 'data:image/svg+xml;base64,' . base64_encode($svg);
 	}
