@@ -4,15 +4,12 @@ return [
 
 	// Enable if 2fa is required
         'required' => env('2FA_REQUIRED', false),
-	
+
 	// Prefix for the default routes
 	'prefix' => '2fa',
 
 	// The url with the form for authentication, override to use your own
 	'auth_route' => '/2fa/auth',
-
-	// The url to redirect to after a successful validation
-	'redirect' => '/home',
 
 	// The authentication guard to use for logged in users
 	'guard' => 'web',
@@ -30,7 +27,7 @@ return [
 	'middleware' => [
 		'web',
 	],
-	
+
 	// Exclude urls from middleware
         'exclude_urls' => [
             'admin/logout'

@@ -50,7 +50,7 @@ class Laravel2faController extends Controller
 			Laravel2fa::remember();
 		}
 
-		return redirect(config('2fa.redirect'));
+        return redirect()->intended();
 	}
 
 	/**
