@@ -91,7 +91,7 @@ class Laravel2faController extends Controller
 			Laravel2fa::remember();
 		}
 		
-		if($redirect = config('2fa.redirect'){
+		if($redirect = config('2fa.redirect')){
 			return redirect($redirect);
 		}
 
