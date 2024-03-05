@@ -95,7 +95,7 @@ class Laravel2fa {
 		$settings = self::getSettings($model);
 
 		Cookie::forget(self::cookieName($settings));
-		Settings::where('model_type', get_class($model))->where('model_id', $model->id)->delete();
+		Settings::where('model_type', get_class($model))->where('model_id', (string)$model->id)->delete();
 	}
 
 	/**
